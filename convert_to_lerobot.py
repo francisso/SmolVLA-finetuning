@@ -7,11 +7,12 @@ import cv2
 from lerobot.datasets.lerobot_dataset import LeRobotDataset
 
 SRC = "/home/anton/Desktop/dataset_1"
-DST = "lerobot_dataset_full_delta"
+DST = "lerobot_dataset_full_absolute"
 
 #empty DST dir
 
 FPS = 30
+DELTA = False
 
 # --- define features ---
 features = {
@@ -100,7 +101,9 @@ for ep_idx, ep_dir in enumerate(episode_dirs):
         frame_usb = cv2.resize(frame_usb, (640, 480))[:, :, ::-1]
         frame_zed = cv2.resize(frame_zed, (640, 480))[:, :, ::-1]
 
-        action = states[min(i + 1, T-1)][:-1] - states[i][:-1]
+        action = states[min(i + 1, T-1)][:-1] 
+        if DELTA:
+            action -= states[i][:-1]
 
         dataset.add_frame({
             "action": action,

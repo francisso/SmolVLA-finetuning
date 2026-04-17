@@ -23,6 +23,26 @@ This repository contains code for fine-tuning SmolVLA (Small Vision-Language-Act
 
 ## Usage
 
+### Running Sequence
+
+1. Copy the collected dataset. The dataset folder should contain subfolders like `episode_000081`.
+2. Configure the paths in `convert_to_lerobot.py`, then run it to create the dataset for training:
+   ```
+   python convert_to_lerobot.py
+   ```
+3. Split the converted dataset into training and validation sets:
+   ```source
+   ./split.sh
+   ```
+4. Run the training script:
+   ```source
+   ./train.sh
+   ```
+5. Check the results by running the model:
+   ```
+   python run_model.py
+   ```
+
 ### Data Preparation
 
 - **convert_to_lerobot.py**: Converts datasets to the LeRobot format for training.
